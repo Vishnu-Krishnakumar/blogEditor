@@ -1,0 +1,97 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+.allPosts{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+#postCard{
+  display: flex;
+  flex-direction: column;
+  border: 5px teal solid;
+  align-items: center;
+  border-radius: 20px;
+  justify-content: center;
+  margin: 10px;
+  padding:15px;
+  min-height:100px;
+  width: 300px;
+  text-overflow: ellipsis;
+  overflow: hidden ;
+  transition:min-height 2s, width 2s;
+}
+.permaCard li{
+  text-align:left ;
+}
+.postCardTitle{
+  cursor:pointer;
+  width:auto;
+}
+
+.commentSection{
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  margin-top: 25px;
+}
+
+.commentCard{
+  width:300px;
+  margin-top: 5px;
+  text-align: left;
+}
+
+#postCard.permaCard{
+  min-height: 300px;
+  width: 900px;
+}
+.commentForm{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  align-items: end;
+  text-align: left;
+}
+textarea{
+  width: 250px;
+  height: 100px;
+}
+.commentSubmit{
+  width:200px;
+  height:50px
+}
+li{
+  list-style-type: none;
+}
+
+.registrationForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+.editor{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#postCardEditor{
+  display: flex;
+  flex-direction: column;
+  border: 5px teal solid;
+  align-items: center;
+  border-radius: 20px;
+  justify-content: center;
+  margin: 10px;
+  padding:15px;
+  min-height:100px;
+  width: 300px;
+  text-overflow: ellipsis;
+  overflow: hidden ;
+  transition:min-height 2s, width 2s;
+}
