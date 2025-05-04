@@ -28,11 +28,12 @@ function Post({title,content,published,createdAt,id,setHover,hover,user}) {
       setComments([]);
     }
   },[hover])
-
+  
   return (
     <div id = "postCard" className = {hover === id ?'permaCard':'card'}  >
       <div className ="posts"> 
       <h3 onClick ={permaHover} className ="postCardTitle" >{title}</h3>
+      {hover === id && <li>Published : {published?"True":"False"}</li>}
       {hover === id && <li>{created}</li>}
       {hover === id && <li>{content}</li> }
       <div className = "commentSection" style = {{visibility:hover === id?"visible":"hidden"}} >

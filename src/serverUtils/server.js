@@ -14,7 +14,22 @@ async function getPosts() {
     console.error(error);
   }
 }
-
+async function getAllposts(){
+  try{
+    const response = await fetch("https://blogapi-rqj2.onrender.com/posts/allPosts",{
+      mode:"cors",
+      method: "GET",
+      credentials: "include",
+      headers:{
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error){
+    console.error(error);
+  }
+}
 async function log(formData) {
   const body = {
     email: formData.get("email"),
@@ -109,4 +124,4 @@ async function postComments(formData){
    }
 }
 
-export { getPosts, log,getComments,postComments,register };
+export { getPosts, log,getComments,postComments,register,getAllposts };
