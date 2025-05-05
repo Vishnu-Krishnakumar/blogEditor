@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {getComments,postComments} from "./serverUtils/server"
 import Comment from "./Comment";
+
 import { parseISO , getDate} from 'date-fns';
 function Post({title,content,published,createdAt,id,setHover,hover,user}) {
   const [comments,setComments] = useState([])
@@ -47,7 +48,7 @@ function Post({title,content,published,createdAt,id,setHover,hover,user}) {
         </form>
         </div>
       {comments.map((comment)=>{
-        return <Comment arthur = {comment.username} content ={comment.content} createdAt = {comment.createdAt} ></Comment>
+        return <Comment user ={user}arthur = {comment.username} id = {comment.id}content ={comment.content} postId ={id} createdAt = {comment.createdAt} ></Comment>
       })}
       
         
