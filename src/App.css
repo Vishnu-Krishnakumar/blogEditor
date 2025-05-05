@@ -5,11 +5,10 @@
   text-align: center;
 }
 .allPosts{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
+
 #postCard{
   display: flex;
   flex-direction: column;
@@ -49,6 +48,9 @@
 #postCard.permaCard{
   min-height: 300px;
   width: 900px;
+  align-items: center;
+  justify-self: center;
+  justify-content: center;
 }
 .commentForm{
   display: flex;

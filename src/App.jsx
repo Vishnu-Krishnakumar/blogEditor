@@ -35,7 +35,7 @@ function App() {
             <h1>You are logged in {logIn.user.firstname}</h1>
             <h2>Click on a post title to read and comment on!</h2>
             <CreatePost hover ={hover} user ={logIn.user} />
-            <div className ="allPosts">
+            <div className ={hover === -1?"allPosts":"allPostsSingle"}>
               {posts.map((post) => {
                 if(hover === -1 || hover === post.id )
                 return <Post title ={post.title} content = {post.content} createdAt ={post.createdAt} id = {post.id} published = {post.published} hover ={hover} setHover={setHover} user = {logIn.user} />
