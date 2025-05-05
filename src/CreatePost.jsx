@@ -1,10 +1,10 @@
 import { useState,useRef } from "react"
 import { Editor } from '@tinymce/tinymce-react';
 import {newPost, getPosts} from './serverUtils/server';
+
 function CreatePost({user,setPosts}){
   const [editHover, setEditHover] = useState(false);
   const editorRef = useRef(null);
-
 
   async function log(formData) {
     console.log(formData);
@@ -45,7 +45,7 @@ function CreatePost({user,setPosts}){
             <input type = "hidden" name ="email" value = {user.email} ></input>
             <input type = "hidden" name ="id" value = {user.id} ></input>
             <Editor 
-              apiKey="6994t85wpqut257bvkn7wh3qzduol2mk48o9dokbj6tnjkcd"
+              apiKey={import.meta.env.VITE_tinyApiKey}
               onInit={(evt, editor) => editorRef.current = editor}
               initialValue="<p>Write your new post here!.</p>"
               init={{
@@ -73,5 +73,3 @@ function CreatePost({user,setPosts}){
 }
 
 export default CreatePost
-
-//6994t85wpqut257bvkn7wh3qzduol2mk48o9dokbj6tnjkcd

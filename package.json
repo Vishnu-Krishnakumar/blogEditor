@@ -12,6 +12,7 @@
   "dependencies": {
     "@tinymce/tinymce-react": "^6.1.0",
     "date-fns": "^4.1.0",
+    "dotenv": "^16.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-error-boundary": "^5.0.0",
