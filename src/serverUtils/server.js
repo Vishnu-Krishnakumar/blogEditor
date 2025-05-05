@@ -168,4 +168,30 @@ async function deleteComment(user,postId,id){
   }catch(error){return error}
 }
 
-export { getPosts, log,getComments,postComments,register,getAllposts,newPost,deleteComment };
+async function deletePost(user,postId){
+  try{
+    const response = await fetch(`https://blogapi-rqj2.onrender.com/posts/${postId}/`,{
+      mode:"cors",
+      method:"DELETE",
+      credentials:"include",
+      headers:{
+        "Content-Type":"application/json",
+      },
+      user:JSON.stringify(user),
+    })
+    const result = await response.json();
+    return result;
+  }catch(error){return error}
+}
+
+export { 
+  getPosts,
+  log,
+  getComments,
+  postComments,
+  register,
+  getAllposts,
+  newPost,
+  deleteComment,
+  deletePost 
+};

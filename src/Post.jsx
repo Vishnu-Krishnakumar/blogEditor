@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import {getComments,postComments} from "./serverUtils/server"
+import {getPosts} from "./serverUtils/server"
+import {getComments,postComments,deletePost} from "./serverUtils/server"
 import Comment from "./Comment";
 
 import { parseISO , getDate} from 'date-fns';
-function Post({title,content,published,createdAt,id,setHover,hover,user}) {
+function Post({title,content,published,createdAt,id,setHover,hover,user,posts,setPosts}) {
   const [comments,setComments] = useState([])
   const created = parseISO(createdAt).toDateString();
   async function data(){
@@ -24,6 +25,17 @@ function Post({title,content,published,createdAt,id,setHover,hover,user}) {
     await data();
   }
 
+  async function remove(e){
+    e.preventDefault()
+    let response = await deletePost(user,id);
+    if(response){
+     let data = await getPosts()
+     console.log(data);
+     setPosts(data);
+     setHover(-1);
+    }
+  }
+
   useEffect(()=>{
     if(hover !== id){
       setComments([]);
@@ -37,6 +49,9 @@ function Post({title,content,published,createdAt,id,setHover,hover,user}) {
       {hover === id && <li>Published : {published?"True":"False"}</li>}
       {hover === id && <li>{created}</li>}
       {hover === id && <li>{content}</li> }
+      
+      {hover === id && <button onClick={remove}>Delete</button>}
+
       <div className = "commentSection" style = {{visibility:hover === id?"visible":"hidden"}} >
       <label>Comment Section</label>
       <form className = "commentForm" action ={submit} >

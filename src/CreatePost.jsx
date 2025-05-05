@@ -1,7 +1,7 @@
 import { useState,useRef } from "react"
 import { Editor } from '@tinymce/tinymce-react';
-import {newPost} from './serverUtils/server';
-function CreatePost({user}){
+import {newPost, getPosts} from './serverUtils/server';
+function CreatePost({user,setPosts}){
   const [editHover, setEditHover] = useState(false);
   const editorRef = useRef(null);
 
@@ -12,13 +12,18 @@ function CreatePost({user}){
     console.log(editorRef.current.getContent());
     const data ={
       title:formData.get("title"),
-      content:editorRef.current.getContent(),
+      content:editorRef.current.getContent({format:'text'}),
       published:formData.get("published"),
       id : formData.get("id"),
     }
 
     console.log(data);
     let createdPost = await newPost(data);
+    console.log(createdPost);
+    if(createdPost){
+      let data = await getPosts()
+      setPosts(data);
+    }
   };
 
   async function permaHover(){
