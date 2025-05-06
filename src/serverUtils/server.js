@@ -1,3 +1,4 @@
+
 async function getPosts() {
   try {
     const response = await fetch("https://blogapi-rqj2.onrender.com/posts", {
@@ -184,6 +185,23 @@ async function deletePost(user,postId){
   }catch(error){return error}
 }
 
+async function updatePost(user,post){  
+  try{
+    const response = await fetch(`https://blogapi-rqj2.onrender.com/posts/${post.id}/`,{
+      mode:"cors",
+      method:"PUT",
+      credentials:"include",
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body:JSON.stringify(post),
+      user:JSON.stringify(user),
+    })
+    const result = await response.json();
+    return result;
+  }catch(error){return error}
+}
+
 export { 
   getPosts,
   log,
@@ -193,5 +211,6 @@ export {
   getAllposts,
   newPost,
   deleteComment,
-  deletePost 
+  deletePost,
+  updatePost,
 };

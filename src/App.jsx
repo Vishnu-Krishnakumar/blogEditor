@@ -44,8 +44,9 @@ function App() {
                     content = {post.content} 
                     createdAt ={post.createdAt} 
                     key = {post.createdAt} 
-                    id = {post.id} published = 
-                    {post.published} hover ={hover} 
+                    id = {post.id} 
+                    published = {post.published} 
+                    hover ={hover} 
                     setHover={setHover} 
                     user = {logIn.user} 
                     posts ={posts}
