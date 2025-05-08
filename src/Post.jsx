@@ -1,13 +1,23 @@
-import { useEffect, useState,useRef } from "react";
+import { useEffect, useState,useRef} from "react";
+import {useFormStatus} from "react-dom"
 import {getPosts} from "./serverUtils/server"
 import {getComments,postComments,deletePost,updatePost} from "./serverUtils/server"
 import { Editor } from '@tinymce/tinymce-react';
 import Comment from "./Comment";
-
 import { parseISO , getDate} from 'date-fns';
+
+function Update() {
+  const { pending } = useFormStatus();
+  return (
+    <button type="submit" disabled={pending}>
+      {pending ? "Updating..." : "Update"}
+    </button>
+  );
+}
+
 function Post({title,content,published,createdAt,id,setHover,hover,user,posts,setPosts}) {
   const [comments,setComments] = useState([])
-  const [edit,setEdit] = useState([false]);
+
   const [editHover, setEditHover] = useState(false);
   const editorRef = useRef(null);
   const created = parseISO(createdAt).toDateString();
@@ -89,7 +99,7 @@ function Post({title,content,published,createdAt,id,setHover,hover,user,posts,se
       <div>
         <form action ={update}>
           <label>Title</label>
-          <input type = "text" name = "title" required value = {title}></input>
+          <input type = "text" name = "title" required defaultValue = {title}></input>
           <input type = "radio" name ="published" value ="true" required></input>
           <label>published</label>
           <input type = "radio" name ="published" value ="false" required></input>
@@ -115,7 +125,8 @@ function Post({title,content,published,createdAt,id,setHover,hover,user,posts,se
             content_css:["dark"],
             }}
           />
-          <button type ="submit">Update</button>
+          <Update></Update>
+          {/* <button type ="submit">Update</button> */}
           <button onClick={remove}>Delete</button>
         </form>
       </div> 
@@ -132,7 +143,7 @@ function Post({title,content,published,createdAt,id,setHover,hover,user,posts,se
         
 
           {comments.map((comment)=>{
-             return <Comment key ={comment.createdAt} user ={user}arthur = {comment.username} id = {comment.id}content ={comment.content} postId ={id} createdAt = {comment.createdAt} ></Comment>
+             return <Comment user ={user}arthur = {comment.username} id = {comment.id}content ={comment.content} postId ={id} createdAt = {comment.createdAt} ></Comment>
           })}
           </div>
      

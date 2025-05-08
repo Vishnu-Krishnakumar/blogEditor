@@ -1,10 +1,22 @@
 import { useState,useRef } from "react"
 import { Editor } from '@tinymce/tinymce-react';
 import {newPost, getPosts} from './serverUtils/server';
+import { useFormStatus } from "react-dom";
+
+function Submit() {
+  const { pending } = useFormStatus();
+  return (
+    <button type="submit" disabled={pending}>
+      {pending ? "Submitting..." : "Submit"}
+    </button>
+  );
+}
+
 
 function CreatePost({user,setPosts}){
   const [editHover, setEditHover] = useState(false);
   const editorRef = useRef(null);
+  
 
   async function log(formData) {
     const data ={
@@ -61,7 +73,7 @@ function CreatePost({user,setPosts}){
               content_css:["dark"],
               }}
             />
-          <button type = "submit" >Submit Post</button>  
+          <Submit/> 
           </form>
         </div>
         </div>

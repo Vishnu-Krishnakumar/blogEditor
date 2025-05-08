@@ -12,7 +12,7 @@ function Comment({postId,arthur,content,createdAt,user,id}){
   }
 
   return(
-    <div className = "commentCard">
+    <div key ={createdAt} className = "commentCard">
       <h3>{arthur[0]}</h3>
       <label>{created}</label>
       <p>{content}</p>

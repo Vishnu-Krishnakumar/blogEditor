@@ -2,6 +2,7 @@ import { useState,useEffect  } from 'react'
 import Login from "./LogIn";
 import Post from "./Post"
 import CreatePost from './CreatePost.jsx';
+import Navigation from './Navigation.jsx';
 import './App.css'
 import {getPosts} from "./serverUtils/server"
 import { Link } from "react-router-dom";
@@ -10,20 +11,39 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [hover,setHover] = useState(-1)
   
+  useEffect(()=>{  
+    try{
+      let token = localStorage.getItem("authToken");
+      if(token === null) return 
+      const currentTimestamp = Math.floor(Date.now() / 1000);
+      token = token.split('.');
+      let exp = JSON.parse(atob(token[1])).exp;
+      token = JSON.parse(atob(token[1])).user;
+      if(exp < currentTimestamp){
+        return console.log("token expired")
+      }
+      else{
+        setLogin({user:token,verify:true});
+    } 
+    }catch(error){console.log(error)}
+    
+  },[])
+
+
   useEffect( () => {
     if (logIn.verify) {
       async function fetch() {
         let data = await getPosts();
-        console.log(data);
-        setPosts(data);        
+        setPosts(data);  
       }
       fetch();
-
+  
     }
    }, [logIn]);
   
   return (
     <>
+     {logIn.verify && <Navigation setLogIn={setLogin}></Navigation>}
       {!logIn.verify ? (
       <div>
         <Login logIn ={logIn}setLogin={setLogin}></Login>
@@ -32,7 +52,7 @@ function App() {
       ):
       (
         <>
-            <h1>You are logged in {logIn.user.firstname}</h1>
+            <h1>Welcome {logIn.user.firstname}.</h1>
             <h2>Click on a post title to read and comment on!</h2>
             <CreatePost hover ={hover} user ={logIn.user} setPosts ={setPosts} />
             <div className ={hover === -1?"allPosts":"allPostsSingle"}>

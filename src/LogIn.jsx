@@ -5,8 +5,11 @@ function Login({setLogin,logIn }) {
   async function logIn(formData) {
     const verified = await log(formData);
     console.log(verified);
-    if(verified.user.author){
+    if(verified.user){
       setLogin({user:verified.user, verify:verified.verify});
+    }
+    else{
+      return(console.log("You didnt register as an author!"));
     }
   }
   return (
